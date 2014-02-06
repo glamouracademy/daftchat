@@ -9,9 +9,8 @@ class UsersController < ApplicationController
   end
 
   def authenticate
+    session[:user] = user
     redirect_to messages_url
-    #redirect to messages index
-    #pass username value
   end
 
   # GET /users/1

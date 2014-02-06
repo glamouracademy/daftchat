@@ -6,6 +6,8 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.all
     @message = Message.new
+    @user ||= session[:user_id] &&
+      User.find_by(id: session[:user_id])
   end
 
   # GET /messages/1
