@@ -4,7 +4,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    @user = User.new
     @users = User.all
+  end
+
+  def authenticate
+    redirect_to messages_url
+    #redirect to messages index
+    #pass username value
   end
 
   # GET /users/1

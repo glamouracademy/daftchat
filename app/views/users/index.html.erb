@@ -1,29 +1,26 @@
-<h1>Listing users</h1>
+<h1>Welcome to daftchat</h1>
+<%= form_for @user, url: url_for(action: :authenticate) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this message from being saved:</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Question</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.question %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<p>Which dafter are you?</p>
 
-<br>
+<%= select_tag "user", options_from_collection_for_select(@users, "id", "name"), prompt: "Select a Name" %>
 
-<%= link_to 'New User', new_user_path %>
+<%= f.submit "Submit" %>
+<% end %>
+
+
+
+
+
+

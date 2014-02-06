@@ -7,7 +7,10 @@ Chatroom2::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'messages#index'
+  root 'users#index'
+
+  post 'users/authenticate' => 'users#authenticate'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
