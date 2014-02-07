@@ -5,9 +5,10 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     @messages = Message.all
+    
     @message = Message.new
-    @user ||= session[:user_id] &&
-      User.find_by(id: session[:user_id])
+    @user ||= session[:user] &&
+      User.find_by(id: session[:user])
   end
 
   # GET /messages/1
@@ -28,6 +29,8 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
+    @message.user = session[:user] &&
+      User.find_by(id: session[:user])
 
     respond_to do |format|
       if @message.save

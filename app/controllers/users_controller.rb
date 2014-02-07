@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    session[:user] = user
+    session[:user] = params[:user]
     redirect_to messages_url
   end
 
