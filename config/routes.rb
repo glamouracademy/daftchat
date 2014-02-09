@@ -8,7 +8,7 @@ Chatroom2::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'users#index'
-
+  get 'users/:id/question.json' => 'users#question'
   post 'users/authenticate' => 'users#authenticate'
 
 

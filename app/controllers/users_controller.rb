@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :question, :authenticate]
 
   # GET /users
   # GET /users.json
@@ -8,9 +8,30 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  # GET /users/1/question.json
+  def question
+    # get question from the user
+    q = @user.question
+    # package question in json
+    # return the json to the browser
+    render :json => q.to_json
+  end
+
+  # POST /users/authenticate
   def authenticate
-    session[:user] = params[:user]
-    redirect_to messages_url
+    # get the answer from the user's input
+    @user_answer = params[:answer]
+    # compare the user input to the answer in the db
+    # if success, redirect to messages
+    if @user.answer_correct?(@user_answer)
+      session[:user] = params[:id]
+      redirect_to messages_url
+    else
+      # if error, &&^%@#!
+      @users = User.all
+      @user.errors.add(:answer,"Stop pretending to be #{@user.name}!")
+      render action: 'index'
+    end
   end
 
   # GET /users/1
@@ -75,6 +96,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :question)
+      params.require(:user).permit(:name, :question, :answer)
     end
 end

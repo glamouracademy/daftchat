@@ -13,8 +13,8 @@
   <tbody>
     <% @messages.each do |message| %>
       <tr>
-        <td><%= message.user.name %><%= message.message %></td>
-      </tr>
+        <td><%= message.user.name %> <%= message.message %></td>
+      </tr> 
     <% end %>
   </tbody>
 </table>

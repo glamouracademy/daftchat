@@ -1,5 +1,5 @@
 <h1>Welcome to daftchat</h1>
-<%= form_for @user, url: url_for(action: :authenticate) do |f| %>
+<%= form_tag url_for(action: :authenticate) do %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this message from being saved:</h2>
@@ -14,9 +14,16 @@
 
 <h3>Which dafter are you?</h3>
 
-<%= select_tag "user", options_from_collection_for_select(@users, "id", "name"), prompt: "Select a Name" %>
+<%= select_tag "id", options_from_collection_for_select(@users, "id", "name"), prompt: "Select a Name" %>
 
-<%= f.submit "Submit" %>
+<div id="question">
+<h3>Security Question</h3>
+<h4 id="question_text"></h4>
+<%= text_area_tag :answer %>
+<br>
+<%= submit_tag "Submit" %>
+</div>
+
 <% end %>
 
 
