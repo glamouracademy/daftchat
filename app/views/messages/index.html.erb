@@ -13,12 +13,12 @@
   <tbody>
     <% @messages.each do |message| %>
       <tr>
-        <td><%= message.user.name %> <%= message.message %></td>
+        <td><%= message.user.name %>: <%= message.message %></td>
       </tr> 
     <% end %>
   </tbody>
 </table>
 
-<br>
+<hr>
 
 <%= render 'form' %>

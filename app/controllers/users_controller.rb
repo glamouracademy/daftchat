@@ -19,17 +19,13 @@ class UsersController < ApplicationController
 
   # POST /users/authenticate
   def authenticate
-    # get the answer from the user's input
     @user_answer = params[:answer]
-    # compare the user input to the answer in the db
-    # if success, redirect to messages
     if @user.answer_correct?(@user_answer)
       session[:user] = params[:id]
       redirect_to messages_url
     else
-      # if error, &&^%@#!
       @users = User.all
-      @user.errors.add(:answer,"Stop pretending to be #{@user.name}!")
+      @user.errors.add(:answer, "is incorrect! Stop pretending to be #{@user.name}!")
       render action: 'index'
     end
   end

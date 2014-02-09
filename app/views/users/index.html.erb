@@ -2,13 +2,11 @@
 <%= form_tag url_for(action: :authenticate) do %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this message from being saved:</h2>
-
-      <ul>
+      <h3>
       <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <%= msg %>
       <% end %>
-      </ul>
+      </h3>
     </div>
   <% end %>
 
