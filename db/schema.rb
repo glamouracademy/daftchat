@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140204121125) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "messages", force: true do |t|
     t.text     "message"
     t.datetime "created_at"
